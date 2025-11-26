@@ -22,5 +22,3 @@ const themeToggle = document.getElementById("theme-toggle");
 const themeIcon = document.getElementById("theme-icon");
 const languageToggle = document.getElementById("language-toggle");
 const currentLang = document.getElementById("current-lang");
-
-// E TODO O RESTO DO SEU JS AQUI...
