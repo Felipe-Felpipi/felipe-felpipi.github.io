@@ -28,12 +28,103 @@
     <!-- Flag Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.4/css/flag-icons.min.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/tailwind-config.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .link-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .link-card {
+            border: 1px solid #334155;
+        }
+        
+        .dark .link-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .high-contrast {
+            filter: contrast(1.5);
+        }
+        
+        .high-contrast .link-card {
+            border: 2px solid #000;
+        }
+        
+        .dark.high-contrast .link-card {
+            border: 2px solid #fff;
+        }
+    </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-dark-900 dark:to-dark-800 font-sans transition-colors duration-300">
-    
     <!-- Accessibility Widget -->
     <div id="accessibility-widget" class="fixed bottom-6 right-6 z-50">
         <button id="accessibility-toggle" class="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110">
@@ -71,13 +162,16 @@
             </button>
             <div id="language-dropdown" class="absolute top-12 right-0 w-32 bg-white dark:bg-dark-700 rounded-lg shadow-lg py-1 hidden glass-effect">
                 <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="pt">
-                    <span class="fi fi-br mr-2"></span> Português
+                    <span class="fi fi-br mr-2"></span>
+                    Português
                 </button>
                 <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="es">
-                    <span class="fi fi-es mr-2"></span> Español
+                    <span class="fi fi-es mr-2"></span>
+                    Español
                 </button>
                 <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="en">
-                    <span class="fi fi-us mr-2"></span> English
+                    <span class="fi fi-us mr-2"></span>
+                    English
                 </button>
             </div>
         </div>
@@ -94,17 +188,25 @@
         <!-- Profile Section -->
         <div class="text-center mb-8 animate-fade-in">
             <div class="relative inline-block mb-4">
-                <img src="https://picsum.photos/150?random=1" alt="Foto de perfil de Felipe Felp" class="w-32 h-32 rounded-full border-4 border-white dark:border-dark-700 shadow-lg mx-auto" loading="lazy" />
+                <img 
+                    src="https://picsum.photos/150?random=1" 
+                    alt="Foto de perfil de Felipe Felp" 
+                    class="w-32 h-32 rounded-full border-4 border-white dark:border-dark-700 shadow-lg mx-auto"
+                    loading="lazy"
+                />
                 <div class="absolute -bottom-2 -right-2 bg-primary-500 text-white p-2 rounded-full">
                     <i class="fas fa-check text-xs"></i>
                 </div>
             </div>
+            
             <h1 class="text-2xl font-bold text-dark-800 dark:text-white mb-2" id="profile-name">Felipe Felp</h1>
             <p class="text-primary-600 dark:text-primary-400 font-medium mb-3" id="profile-title">
                 Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer
             </p>
+            
             <p class="text-dark-600 dark:text-dark-300 text-sm mb-6 max-w-sm mx-auto" id="profile-description">
-                Criando soluções inovadoras através de código, design e tecnologia. Especializado em desenvolvimento web, aplicações móveis e criação de jogos.
+                Criando soluções inovadoras através de código, design e tecnologia. 
+                Especializado em desenvolvimento web, aplicações móveis e criação de jogos.
             </p>
         </div>
 
@@ -201,11 +303,284 @@
         </div>
     </div>
 
-    <!-- JavaScript Files -->
-    <script src="data/translations.js"></script>
-    <script src="js/theme.js"></script>
-    <script src="js/language.js"></script>
-    <script src="js/accessibility.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        // Language data
+        const translations = {
+            "pt": {
+                "profileName": "Felipe Felp",
+                "profileTitle": "Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer",
+                "profileDescription": "Criando soluções inovadoras através de código, design e tecnologia. Especializado em desenvolvimento web, aplicações móveis e criação de jogos.",
+                "linkGitHub": "GitHub",
+                "linkGitHubDesc": "Projetos e código fonte",
+                "linkLinkedIn": "LinkedIn",
+                "linkLinkedInDesc": "Conecte-se profissionalmente",
+                "linkPortfolio": "Portfólio",
+                "linkPortfolioDesc": "Meus projetos e trabalhos",
+                "linkEmail": "E-mail",
+                "linkEmailDesc": "Entre em contato",
+                "linkYouTube": "YouTube",
+                "linkYouTubeDesc": "Tutorials e conteúdo",
+                "skillsTitle": "Habilidades & Tecnologias",
+                "footerText": "© 2025 Felipe Felp. Todos os direitos reservados.",
+                "accessibilityTitle": "Acessibilidade",
+                "increaseText": "Aumentar Texto",
+                "decreaseText": "Diminuir Texto",
+                "highContrast": "Alto Contraste",
+                "readPage": "Ler Página"
+            },
+            "es": {
+                "profileName": "Felipe Felp",
+                "profileTitle": "Ingeniero de Software, Desarrollador Fullstack, Diseñador de Juegos y Desarrollador",
+                "profileDescription": "Creando soluciones innovadoras a través de código, diseño y tecnología. Especializado en desarrollo web, aplicaciones móviles y creación de juegos.",
+                "linkGitHub": "GitHub",
+                "linkGitHubDesc": "Proyectos y código fuente",
+                "linkLinkedIn": "LinkedIn",
+                "linkLinkedInDesc": "Conéctate profesionalmente",
+                "linkPortfolio": "Portafolio",
+                "linkPortfolioDesc": "Mis proyectos y trabajos",
+                "linkEmail": "Correo",
+                "linkEmailDesc": "Ponte en contacto",
+                "linkYouTube": "YouTube",
+                "linkYouTubeDesc": "Tutoriales y contenido",
+                "skillsTitle": "Habilidades & Tecnologías",
+                "footerText": "© 2025 Felipe Felp. Todos los derechos reservados.",
+                "accessibilityTitle": "Accesibilidad",
+                "increaseText": "Aumentar Texto",
+                "decreaseText": "Disminuir Texto",
+                "highContrast": "Alto Contraste",
+                "readPage": "Leer Página"
+            },
+            "en": {
+                "profileName": "Felipe Felp",
+                "profileTitle": "Software Engineer, Fullstack Developer, Game Designer and Developer",
+                "profileDescription": "Creating innovative solutions through code, design and technology. Specialized in web development, mobile applications and game creation.",
+                "linkGitHub": "GitHub",
+                "linkGitHubDesc": "Projects and source code",
+                "linkLinkedIn": "LinkedIn",
+                "linkLinkedInDesc": "Connect professionally",
+                "linkPortfolio": "Portfolio",
+                "linkPortfolioDesc": "My projects and works",
+                "linkEmail": "Email",
+                "linkEmailDesc": "Get in touch",
+                "linkYouTube": "YouTube",
+                "linkYouTubeDesc": "Tutorials and content",
+                "skillsTitle": "Skills & Technologies",
+                "footerText": "© 2025 Felipe Felp. All rights reserved.",
+                "accessibilityTitle": "Accessibility",
+                "increaseText": "Increase Text",
+                "decreaseText": "Decrease Text",
+                "highContrast": "High Contrast",
+                "readPage": "Read Page"
+            }
+        };
+
+        // Current state
+        let currentLanguage = "pt";
+        let currentTheme = "light";
+        let textSize = 1; // Base size multiplier
+        let highContrast = false;
+
+        // DOM Elements
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+        const languageToggle = document.getElementById("language-toggle");
+        const currentLang = document.getElementById("current-lang");
+        const languageDropdown = document.getElementById("language-dropdown");
+        const accessibilityToggle = document.getElementById("accessibility-toggle");
+        const accessibilityPanel = document.getElementById("accessibility-panel");
+
+        // Initialize page
+        function init() {
+            loadPreferences();
+            setupEventListeners();
+            updateContent();
+        }
+
+        // Load user preferences from localStorage
+        function loadPreferences() {
+            const savedLanguage = localStorage.getItem("preferredLanguage");
+            const savedTheme = localStorage.getItem("preferredTheme");
+            const savedTextSize = localStorage.getItem("textSize");
+            const savedHighContrast = localStorage.getItem("highContrast");
+
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+            }
+
+            if (savedTheme) {
+                currentTheme = savedTheme;
+                document.documentElement.classList.toggle("dark", savedTheme === "dark");
+                updateThemeIcon();
+            }
+
+            if (savedTextSize) {
+                textSize = parseFloat(savedTextSize);
+                applyTextSize();
+            }
+
+            if (savedHighContrast === "true") {
+                highContrast = true;
+                document.body.classList.add("high-contrast");
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener("click", toggleTheme);
+
+            // Language toggle
+            languageToggle.addEventListener("click", toggleLanguageDropdown);
+            
+            // Language selection
+            document.querySelectorAll(".lang-option").forEach(option => {
+                option.addEventListener("click", (e) => {
+                    const lang = e.currentTarget.getAttribute("data-lang");
+                    changeLanguage(lang);
+                    languageDropdown.classList.add("hidden");
+                });
+            });
+
+            // Accessibility toggle
+            accessibilityToggle.addEventListener("click", toggleAccessibilityPanel);
+            
+            // Accessibility features
+            document.querySelectorAll(".accessibility-btn").forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    const action = e.currentTarget.getAttribute("data-action");
+                    handleAccessibilityAction(action);
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener("click", (e) => {
+                if (!languageToggle.contains(e.target) && !languageDropdown.contains(e.target)) {
+                    languageDropdown.classList.add("hidden");
+                }
+                
+                if (!accessibilityToggle.contains(e.target) && !accessibilityPanel.contains(e.target)) {
+                    accessibilityPanel.classList.add("hidden");
+                }
+            });
+        }
+
+        // Theme functionality
+        function toggleTheme() {
+            currentTheme = currentTheme === "light" ? "dark" : "light";
+            document.documentElement.classList.toggle("dark", currentTheme === "dark");
+            localStorage.setItem("preferredTheme", currentTheme);
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            if (currentTheme === "dark") {
+                themeIcon.classList.remove("fa-moon");
+                themeIcon.classList.add("fa-sun");
+            } else {
+                themeIcon.classList.remove("fa-sun");
+                themeIcon.classList.add("fa-moon");
+            }
+        }
+
+        // Language functionality
+        function toggleLanguageDropdown() {
+            languageDropdown.classList.toggle("hidden");
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem("preferredLanguage", lang);
+            currentLang.textContent = lang.toUpperCase();
+            updateContent();
+        }
+
+        // Accessibility functionality
+        function toggleAccessibilityPanel() {
+            accessibilityPanel.classList.toggle("hidden");
+        }
+
+        function handleAccessibilityAction(action) {
+            switch (action) {
+                case "increase-text":
+                    textSize = Math.min(textSize + 0.1, 1.5);
+                    applyTextSize();
+                    break;
+                case "decrease-text":
+                    textSize = Math.max(textSize - 0.1, 0.8);
+                    applyTextSize();
+                    break;
+                case "high-contrast":
+                    toggleHighContrast();
+                    break;
+                case "read-page":
+                    readPageContent();
+                    break;
+            }
+        }
+
+        function applyTextSize() {
+            document.documentElement.style.fontSize = `${textSize * 100}%`;
+            localStorage.setItem("textSize", textSize);
+        }
+
+        function toggleHighContrast() {
+            highContrast = !highContrast;
+            document.body.classList.toggle("high-contrast", highContrast);
+            localStorage.setItem("highContrast", highContrast);
+        }
+
+        function readPageContent() {
+            const content = document.querySelector(".container").innerText;
+            if ("speechSynthesis" in window) {
+                // Cancel any ongoing speech
+                speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(content);
+                utterance.lang = currentLanguage === "pt" ? "pt-BR" : currentLanguage === "es" ? "es-ES" : "en-US";
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert("Seu navegador não suporta leitura de texto.");
+            }
+        }
+
+        // Update all content based on current language
+        function updateContent() {
+            const t = translations[currentLanguage];
+            
+            if (!t) return;
+            
+            // Update profile section
+            document.getElementById("profile-name").textContent = t.profileName;
+            document.getElementById("profile-title").textContent = t.profileTitle;
+            document.getElementById("profile-description").textContent = t.profileDescription;
+            
+            // Update links
+            document.getElementById("link-github").textContent = t.linkGitHub;
+            document.getElementById("link-github-desc").textContent = t.linkGitHubDesc;
+            document.getElementById("link-linkedin").textContent = t.linkLinkedIn;
+            document.getElementById("link-linkedin-desc").textContent = t.linkLinkedInDesc;
+            document.getElementById("link-portfolio").textContent = t.linkPortfolio;
+            document.getElementById("link-portfolio-desc").textContent = t.linkPortfolioDesc;
+            document.getElementById("link-email").textContent = t.linkEmail;
+            document.getElementById("link-email-desc").textContent = t.linkEmailDesc;
+            document.getElementById("link-youtube").textContent = t.linkYouTube;
+            document.getElementById("link-youtube-desc").textContent = t.linkYouTubeDesc;
+            
+            // Update skills section
+            document.getElementById("skills-title").textContent = t.skillsTitle;
+            document.getElementById("footer-text").textContent = t.footerText;
+            
+            // Update accessibility panel
+            document.getElementById("accessibility-title").textContent = t.accessibilityTitle;
+            document.getElementById("increase-text-label").textContent = t.increaseText;
+            document.getElementById("decrease-text-label").textContent = t.decreaseText;
+            document.getElementById("high-contrast-label").textContent = t.highContrast;
+            document.getElementById("read-page-label").textContent = t.readPage;
+        }
+
+        // Initialize the application
+        document.addEventListener("DOMContentLoaded", init);
+    </script>
 </body>
 </html>
