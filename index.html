@@ -5,41 +5,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felipe Felp - Engenheiro de Software & Desenvolvedor Fullstack</title>
-
-    <!-- SEO -->
-    <meta name="description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer.">
+    <meta name="description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer. Conecte-se comigo através dos meus links profissionais.">
     <meta name="keywords" content="engenheiro de software, desenvolvedor fullstack, game designer, programador, desenvolvimento web">
     <meta name="author" content="Felipe Felp">
-
+    
     <!-- Open Graph -->
     <meta property="og:title" content="Felipe Almeida - Engenheiro de Software & Desenvolvedor Fullstack">
     <meta property="og:description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer">
     <meta property="og:type" content="website">
-
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <!-- Flag Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.4/css/flag-icons.min.css">
-
-    <!-- CSS externo -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Configuração do Tailwind -->
-    <script src="tailwind-config.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/tailwind-config.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body class="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-dark-900 dark:to-dark-800 font-sans transition-colors duration-300">
+    
+    <!-- Accessibility Widget -->
+    <div id="accessibility-widget" class="fixed bottom-6 right-6 z-50">
+        <button id="accessibility-toggle" class="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110">
+            <i class="fas fa-universal-access text-lg"></i>
+        </button>
+        <div id="accessibility-panel" class="absolute bottom-16 right-0 w-80 bg-white dark:bg-dark-800 rounded-lg shadow-xl p-4 hidden glass-effect">
+            <h3 class="font-semibold text-dark-800 dark:text-white mb-3" id="accessibility-title">Acessibilidade</h3>
+            <div class="space-y-2">
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="increase-text">
+                    <i class="fas fa-text-height mr-2"></i>
+                    <span id="increase-text-label">Aumentar Texto</span>
+                </button>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="decrease-text">
+                    <i class="fas fa-text-width mr-2"></i>
+                    <span id="decrease-text-label">Diminuir Texto</span>
+                </button>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="high-contrast">
+                    <i class="fas fa-adjust mr-2"></i>
+                    <span id="high-contrast-label">Alto Contraste</span>
+                </button>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="read-page">
+                    <i class="fas fa-volume-up mr-2"></i>
+                    <span id="read-page-label">Ler Página</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-    <!-- JS externo -->
-    <script src="script.js"></script>
+    <!-- Language Selector -->
+    <div class="fixed top-6 right-6 z-40">
+        <div class="relative">
+            <button id="language-toggle" class="bg-white dark:bg-dark-700 shadow-md rounded-full px-4 py-2 text-sm font-medium text-dark-700 dark:text-white hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
+                <i class="fas fa-globe-americas"></i>
+                <span id="current-lang">PT</span>
+            </button>
+            <div id="language-dropdown" class="absolute top-12 right-0 w-32 bg-white dark:bg-dark-700 rounded-lg shadow-lg py-1 hidden glass-effect">
+                <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="pt">
+                    <span class="fi fi-br mr-2"></span> Português
+                </button>
+                <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="es">
+                    <span class="fi fi-es mr-2"></span> Español
+                </button>
+                <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="en">
+                    <span class="fi fi-us mr-2"></span> English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="fixed top-6 left-6 z-40">
+        <button id="theme-toggle" class="bg-white dark:bg-dark-700 shadow-md rounded-full p-3 text-dark-700 dark:text-white hover:shadow-lg transition-all duration-300">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <!-- Profile Section -->
+        <div class="text-center mb-8 animate-fade-in">
+            <div class="relative inline-block mb-4">
+                <img src="https://picsum.photos/150?random=1" alt="Foto de perfil de Felipe Felp" class="w-32 h-32 rounded-full border-4 border-white dark:border-dark-700 shadow-lg mx-auto" loading="lazy" />
+                <div class="absolute -bottom-2 -right-2 bg-primary-500 text-white p-2 rounded-full">
+                    <i class="fas fa-check text-xs"></i>
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-dark-800 dark:text-white mb-2" id="profile-name">Felipe Felp</h1>
+            <p class="text-primary-600 dark:text-primary-400 font-medium mb-3" id="profile-title">
+                Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer
+            </p>
+            <p class="text-dark-600 dark:text-dark-300 text-sm mb-6 max-w-sm mx-auto" id="profile-description">
+                Criando soluções inovadoras através de código, design e tecnologia. Especializado em desenvolvimento web, aplicações móveis e criação de jogos.
+            </p>
+        </div>
+
+        <!-- Links Section -->
+        <div class="space-y-4 mb-8 animate-slide-up">
+            <!-- GitHub -->
+            <a href="https://github.com/felipe-felpipi" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
+                        <i class="fab fa-github text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-github">GitHub</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-github-desc">Projetos e código fonte</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/felipe-almeida-b1134b1b0/" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
+                        <i class="fab fa-linkedin text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-linkedin">LinkedIn</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-linkedin-desc">Conecte-se profissionalmente</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Portfolio -->
+            <a href="https://matchmaking.games/p/felipefelp" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
+                        <i class="fas fa-briefcase text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-portfolio">Portfólio</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-portfolio-desc">Meus projetos e trabalhos</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:felipealmeidajob@gmail.com" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
+                        <i class="fas fa-envelope text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-email">E-mail</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-email-desc">Entre em contato</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@FelipeAlmeidaCoder" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
+                        <i class="fab fa-youtube text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-youtube">YouTube</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-youtube-desc">Tutoriais e conteúdo</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-sm mb-8 animate-slide-up">
+            <h2 class="text-lg font-semibold text-dark-800 dark:text-white mb-4" id="skills-title">Habilidades & Tecnologias</h2>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">JavaScript</span>
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">TypeScript</span>
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">React</span>
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Node.js</span>
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Unity</span>
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Game Design</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-dark-500 dark:text-dark-400 text-sm">
+            <p id="footer-text">© 2025 Felipe Felp. Todos os direitos reservados.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="data/translations.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
