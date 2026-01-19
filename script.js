@@ -1,104 +1,239 @@
-/* Estilos Base (Normal) */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+// Language data
+const translations = {
+    "pt": {
+        "profileName": "Felipe Almeida da Silva (Felp)",
+        "profileTitle": "Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer",
+        "profileDescription": "Criando soluções inovadoras através de código, design e tecnologia. Especializado em desenvolvimento web, aplicações móveis e criação de jogos.",
+        "linkGitHub": "GitHub",
+        "linkGitHubDesc": "Projetos e código fonte",
+        "linkLinkedIn": "LinkedIn",
+        "linkLinkedInDesc": "Conecte-se profissionalmente",
+        "linkPortfolio": "Portfólio",
+        "linkPortfolioDesc": "Meus projetos e trabalhos",
+        "linkEmail": "E-mail",
+        "linkEmailDesc": "Entre em contato",
+        "linkYouTube": "YouTube",
+        "linkYouTubeDesc": "Tutoriais e conteúdo",
+        "skillsTitle": "Habilidades & Tecnologias",
+        "footerText": "© 2025 Felipe Felp. Todos os direitos reservados.",
+        "accessibilityTitle": "Acessibilidade",
+        "increaseText": "Aumentar Texto",
+        "decreaseText": "Diminuir Texto",
+        "highContrast": "Alto Contraste",
+        "readPage": "Ler Página"
+    },
+    "es": {
+        "profileName": "Felipe Almeida da Silva (Felp)",
+        "profileTitle": "Ingeniero de Software, Desarrollador Fullstack, Diseñador de Juegos y Desarrollador",
+        "profileDescription": "Creando soluciones innovadoras a través de código, diseño y tecnología. Especializado en desarrollo web, aplicaciones móviles y creación de juegos.",
+        "linkGitHub": "GitHub",
+        "linkGitHubDesc": "Proyectos y código fuente",
+        "linkLinkedIn": "LinkedIn",
+        "linkLinkedInDesc": "Conéctate profesionalmente",
+        "linkPortfolio": "Portafolio",
+        "linkPortfolioDesc": "Mis proyectos y trabajos",
+        "linkEmail": "Correo",
+        "linkEmailDesc": "Ponte en contacto",
+        "linkYouTube": "YouTube",
+        "linkYouTubeDesc": "Tutoriales y contenido",
+        "skillsTitle": "Habilidades & Tecnologías",
+        "footerText": "© 2025 Felipe Felp. Todos los derechos reservados.",
+        "accessibilityTitle": "Accesibilidad",
+        "increaseText": "Aumentar Texto",
+        "decreaseText": "Disminuir Texto",
+        "highContrast": "Alto Contraste",
+        "readPage": "Leer Página"
+    },
+    "en": {
+        "profileName": "Felipe Almeida da Silva (Felp)",
+        "profileTitle": "Software Engineer, Fullstack Developer, Game Designer and Developer",
+        "profileDescription": "Creating innovative solutions through code, design and technology. Specialized in web development, mobile applications and game creation.",
+        "linkGitHub": "GitHub",
+        "linkGitHubDesc": "Projects and source code",
+        "linkLinkedIn": "LinkedIn",
+        "linkLinkedInDesc": "Connect professionally",
+        "linkPortfolio": "Portfolio",
+        "linkPortfolioDesc": "My projects and works",
+        "linkEmail": "Email",
+        "linkEmailDesc": "Get in touch",
+        "linkYouTube": "YouTube",
+        "linkYouTubeDesc": "Tutorials and content",
+        "skillsTitle": "Skills & Technologies",
+        "footerText": "© 2025 Felipe Felp. All rights reserved.",
+        "accessibilityTitle": "Accessibility",
+        "increaseText": "Increase Text",
+        "decreaseText": "Decrease Text",
+        "highContrast": "High Contrast",
+        "readPage": "Read Page"
+    }
+};
+
+// State Management
+let currentLanguage = localStorage.getItem("preferredLanguage") || "pt";
+let textSize = parseFloat(localStorage.getItem("textSize")) || 1;
+let highContrast = localStorage.getItem("highContrast") === "true";
+
+// DOM Elements
+const elements = {
+    themeToggle: document.getElementById("theme-toggle"),
+    themeIcon: document.getElementById("theme-icon"),
+    languageToggle: document.getElementById("language-toggle"),
+    currentLang: document.getElementById("current-lang"),
+    languageDropdown: document.getElementById("language-dropdown"),
+    accessibilityToggle: document.getElementById("accessibility-toggle"),
+    accessibilityPanel: document.getElementById("accessibility-panel"),
+    body: document.body,
+    root: document.documentElement
+};
+
+// Initialize
+function init() {
+    // Apply initial states
+    changeLanguage(currentLanguage);
+    applyTextSize();
+    if (highContrast) elements.body.classList.add("high-contrast");
+    updateThemeIcon();
+
+    setupEventListeners();
 }
 
-.dark .glass-effect {
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+function setupEventListeners() {
+    // Theme
+    elements.themeToggle.addEventListener("click", toggleTheme);
+
+    // Language
+    elements.languageToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        elements.languageDropdown.classList.toggle("hidden");
+        elements.accessibilityPanel.classList.add("hidden");
+    });
+
+    document.querySelectorAll(".lang-option").forEach(opt => {
+        opt.addEventListener("click", () => {
+            changeLanguage(opt.getAttribute("data-lang"));
+            elements.languageDropdown.classList.add("hidden");
+        });
+    });
+
+    // Accessibility
+    elements.accessibilityToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        elements.accessibilityPanel.classList.toggle("hidden");
+        elements.languageDropdown.classList.add("hidden");
+    });
+
+    document.querySelectorAll(".accessibility-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => handleAccessibility(e.currentTarget.getAttribute("data-action")));
+    });
+
+    // Close on click outside
+    document.addEventListener("click", () => {
+        elements.languageDropdown.classList.add("hidden");
+        elements.accessibilityPanel.classList.add("hidden");
+    });
 }
 
-.link-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid #e2e8f0;
+// Logic Functions
+function toggleTheme() {
+    const isDark = elements.root.classList.contains("dark");
+    if (isDark) {
+        elements.root.classList.remove("dark");
+        localStorage.setItem("preferredTheme", "light");
+    } else {
+        elements.root.classList.add("dark");
+        localStorage.setItem("preferredTheme", "dark");
+    }
+    updateThemeIcon();
 }
 
-.link-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15); 
-    border-color: #38bdf8;
+function updateThemeIcon() {
+    const isDark = elements.root.classList.contains("dark");
+    elements.themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
 }
 
-.dark .link-card {
-    border: 1px solid #334155;
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem("preferredLanguage", lang);
+    elements.currentLang.textContent = lang.toUpperCase();
+    
+    const t = translations[lang];
+    if (!t) return;
+
+    // Mapeamento direto de IDs para chaves do objeto translations
+    const idMap = {
+        // IDs existentes no HTML
+        'profile-name': 'profileName',
+        'profile-title': 'profileTitle',
+        'profile-description': 'profileDescription',
+        'link-github': 'linkGitHub',
+        'link-github-desc': 'linkGitHubDesc',
+        'link-linkedin': 'linkLinkedIn',
+        'link-linkedin-desc': 'linkLinkedInDesc',
+        'link-portfolio': 'linkPortfolio',
+        'link-portfolio-desc': 'linkPortfolioDesc',
+        'link-email': 'linkEmail',
+        'link-email-desc': 'linkEmailDesc',
+        'link-youtube': 'linkYouTube',
+        'link-youtube-desc': 'linkYouTubeDesc',
+        'skills-title': 'skillsTitle',
+        'footer-text': 'footerText',
+        'accessibility-title': 'accessibilityTitle',
+        'increase-text-label': 'increaseText',
+        'decrease-text-label': 'decreaseText',
+        'high-contrast-label': 'highContrast',
+        'read-page-label': 'readPage'
+    };
+
+    // Atualiza todos os elementos baseado no mapeamento
+    Object.keys(idMap).forEach(id => {
+        const el = document.getElementById(id);
+        const key = idMap[id];
+        if (el && t[key]) {
+            el.textContent = t[key];
+        }
+    });
 }
 
-.dark .link-card:hover {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-    border-color: #38bdf8;
+function handleAccessibility(action) {
+    switch(action) {
+        case "increase-text":
+            textSize = Math.min(textSize + 0.1, 1.5);
+            break;
+        case "decrease-text":
+            textSize = Math.max(textSize - 0.1, 0.9);
+            break;
+        case "high-contrast":
+            highContrast = !highContrast;
+            elements.body.classList.toggle("high-contrast", highContrast);
+            localStorage.setItem("highContrast", highContrast);
+            return; // No need to apply text size
+        case "read-page":
+            readPage();
+            return;
+    }
+    localStorage.setItem("textSize", textSize);
+    applyTextSize();
 }
 
-/* --- CORREÇÃO DO ALTO CONTRASTE (Padrão Acessibilidade Real) --- */
-
-/* Quando a classe .high-contrast estiver ativa no body */
-body.high-contrast {
-    background-image: none !important;
-    background-color: #000000 !important; /* Fundo Preto Puro */
-    color: #FFFF00 !important; /* Texto Amarelo Padrão */
+function applyTextSize() {
+    elements.root.style.fontSize = `${textSize * 16}px`; // Base 16px
 }
 
-/* Removemos sombras, efeitos de vidro e gradientes */
-body.high-contrast * {
-    box-shadow: none !important;
-    text-shadow: none !important;
-    backdrop-filter: none !important;
-    background-image: none !important;
-    transition: none !important; /* Remove animações para reduzir tontura */
+function readPage() {
+    if (!window.speechSynthesis) return alert("Seu navegador não suporta leitura.");
+    
+    window.speechSynthesis.cancel();
+    
+    // Construct text to read based on main content
+    const content = document.querySelector("main").innerText;
+    const utterance = new SpeechSynthesisUtterance(content);
+    
+    utterance.lang = currentLanguage === 'pt' ? 'pt-BR' : currentLanguage === 'es' ? 'es-ES' : 'en-US';
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    
+    window.speechSynthesis.speak(utterance);
 }
 
-/* Força fundos pretos e bordas brancas nos cartões */
-body.high-contrast .glass-effect,
-body.high-contrast .link-card,
-body.high-contrast .bg-white,
-body.high-contrast nav a,
-body.high-contrast section,
-body.high-contrast #language-dropdown,
-body.high-contrast #accessibility-panel {
-    background-color: #000000 !important;
-    border: 2px solid #FFFFFF !important;
-    color: #FFFF00 !important;
-}
-
-/* Títulos em Branco para hierarquia */
-body.high-contrast h1,
-body.high-contrast h2,
-body.high-contrast h3,
-body.high-contrast strong,
-body.high-contrast .font-bold {
-    color: #FFFFFF !important;
-}
-
-/* Links e Ícones em Ciano ou Amarelo */
-body.high-contrast i,
-body.high-contrast span {
-    color: #FFFF00 !important;
-}
-
-body.high-contrast a:hover {
-    text-decoration: underline !important;
-    background-color: #333 !important;
-}
-
-/* Ajuste específico para a foto não ficar estourada, mas ter borda */
-body.high-contrast img {
-    filter: grayscale(100%) contrast(1.2);
-    border: 2px solid #FFFFFF !important;
-}
-
-/* Botões de ação */
-body.high-contrast button {
-    background-color: #000000 !important;
-    border: 2px solid #FFFF00 !important;
-    color: #FFFF00 !important;
-}
-
-body.high-contrast button:hover {
-    background-color: #FFFF00 !important;
-    color: #000000 !important;
-}
-
-/* Utilitários */
-.hidden { display: none !important; }
+// Run
+init();
