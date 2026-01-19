@@ -1,62 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-    <base target="_self">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Felp - Engenheiro de Software & Desenvolvedor Fullstack</title>
+    <title>Felipe Almeida da Silva (Felp) - Engenheiro de Software & Desenvolvedor Fullstack</title>
     <meta name="description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer. Conecte-se comigo através dos meus links profissionais.">
     <meta name="keywords" content="engenheiro de software, desenvolvedor fullstack, game designer, programador, desenvolvimento web">
     <meta name="author" content="Felipe Felp">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="Felipe Almeida - Engenheiro de Software & Desenvolvedor Fullstack">
     <meta property="og:description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer">
     <meta property="og:type" content="website">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Flag Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.4/css/flag-icons.min.css">
     
     <script>
+        // Configuração do Tailwind
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                            50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc',
+                            400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+                            800: '#075985', 900: '#0c4a6e',
                         },
                         dark: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
+                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1',
+                            400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155',
+                            800: '#1e293b', 900: '#0f172a',
                         }
                     },
                     fontFamily: {
@@ -79,28 +60,45 @@
                 }
             }
         }
+
+        // Script Anti-Flicker (Executa antes do corpo carregar para definir o tema)
+        try {
+            const savedTheme = localStorage.getItem("preferredTheme");
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } catch (e) {
+            console.log(e);
+        }
     </script>
     
     <style>
+        /* Estilos Base (Normal) */
         .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .dark .glass-effect {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .link-card {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #e2e8f0;
         }
         
         .link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15); 
+            border-color: #38bdf8;
         }
         
         .dark .link-card {
@@ -108,206 +106,258 @@
         }
         
         .dark .link-card:hover {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            border-color: #38bdf8;
+        }
+
+        /* --- CORREÇÃO DO ALTO CONTRASTE (Padrão Acessibilidade Real) --- */
+        
+        /* Quando a classe .high-contrast estiver ativa no body */
+        body.high-contrast {
+            background-image: none !important;
+            background-color: #000000 !important; /* Fundo Preto Puro */
+            color: #FFFF00 !important; /* Texto Amarelo Padrão */
+        }
+
+        /* Removemos sombras, efeitos de vidro e gradientes */
+        body.high-contrast * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            backdrop-filter: none !important;
+            background-image: none !important;
+            transition: none !important; /* Remove animações para reduzir tontura */
+        }
+
+        /* Força fundos pretos e bordas brancas nos cartões */
+        body.high-contrast .glass-effect,
+        body.high-contrast .link-card,
+        body.high-contrast .bg-white,
+        body.high-contrast nav a,
+        body.high-contrast section,
+        body.high-contrast #language-dropdown,
+        body.high-contrast #accessibility-panel {
+            background-color: #000000 !important;
+            border: 2px solid #FFFFFF !important;
+            color: #FFFF00 !important;
+        }
+
+        /* Títulos em Branco para hierarquia */
+        body.high-contrast h1,
+        body.high-contrast h2,
+        body.high-contrast h3,
+        body.high-contrast strong,
+        body.high-contrast .font-bold {
+            color: #FFFFFF !important;
+        }
+
+        /* Links e Ícones em Ciano ou Amarelo */
+        body.high-contrast i,
+        body.high-contrast span {
+            color: #FFFF00 !important;
+        }
+
+        body.high-contrast a:hover {
+            text-decoration: underline !important;
+            background-color: #333 !important;
+        }
+
+        /* Ajuste específico para a foto não ficar estourada, mas ter borda */
+        body.high-contrast img {
+            filter: grayscale(100%) contrast(1.2);
+            border: 2px solid #FFFFFF !important;
         }
         
-        .high-contrast {
-            filter: contrast(1.5);
+        /* Botões de ação */
+        body.high-contrast button {
+            background-color: #000000 !important;
+            border: 2px solid #FFFF00 !important;
+            color: #FFFF00 !important;
         }
         
-        .high-contrast .link-card {
-            border: 2px solid #000;
+        body.high-contrast button:hover {
+            background-color: #FFFF00 !important;
+            color: #000000 !important;
         }
-        
-        .dark.high-contrast .link-card {
-            border: 2px solid #fff;
-        }
+
+        /* Utilitários */
+        .hidden { display: none !important; }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-dark-900 dark:to-dark-800 font-sans transition-colors duration-300">
-    <!-- Accessibility Widget -->
+<body class="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-dark-900 dark:to-dark-800 font-sans transition-colors duration-300 text-dark-900 dark:text-gray-100">
+    
     <div id="accessibility-widget" class="fixed bottom-6 right-6 z-50">
-        <button id="accessibility-toggle" class="bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110">
-            <i class="fas fa-universal-access text-lg"></i>
+        <button id="accessibility-toggle" aria-label="Opções de Acessibilidade" class="bg-primary-600 hover:bg-primary-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-primary-300">
+            <i class="fas fa-universal-access text-xl"></i>
         </button>
-        <div id="accessibility-panel" class="absolute bottom-16 right-0 w-80 bg-white dark:bg-dark-800 rounded-lg shadow-xl p-4 hidden glass-effect">
-            <h3 class="font-semibold text-dark-800 dark:text-white mb-3" id="accessibility-title">Acessibilidade</h3>
+        <div id="accessibility-panel" class="absolute bottom-20 right-0 w-72 bg-white dark:bg-dark-800 rounded-xl shadow-2xl p-4 hidden glass-effect border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-dark-800 dark:text-white mb-3 flex items-center gap-2" id="accessibility-title">
+                <i class="fas fa-universal-access"></i> Acessibilidade
+            </h3>
             <div class="space-y-2">
-                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="increase-text">
-                    <i class="fas fa-text-height mr-2"></i>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="increase-text">
+                    <i class="fas fa-plus-circle text-primary-500"></i>
                     <span id="increase-text-label">Aumentar Texto</span>
                 </button>
-                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="decrease-text">
-                    <i class="fas fa-text-width mr-2"></i>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="decrease-text">
+                    <i class="fas fa-minus-circle text-primary-500"></i>
                     <span id="decrease-text-label">Diminuir Texto</span>
                 </button>
-                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="high-contrast">
-                    <i class="fas fa-adjust mr-2"></i>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="high-contrast">
+                    <i class="fas fa-adjust text-primary-500"></i>
                     <span id="high-contrast-label">Alto Contraste</span>
                 </button>
-                <button class="accessibility-btn w-full text-left px-3 py-2 rounded hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors" data-action="read-page">
-                    <i class="fas fa-volume-up mr-2"></i>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="read-page">
+                    <i class="fas fa-volume-up text-primary-500"></i>
                     <span id="read-page-label">Ler Página</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Language Selector -->
     <div class="fixed top-6 right-6 z-40">
         <div class="relative">
-            <button id="language-toggle" class="bg-white dark:bg-dark-700 shadow-md rounded-full px-4 py-2 text-sm font-medium text-dark-700 dark:text-white hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
-                <i class="fas fa-globe-americas"></i>
+            <button id="language-toggle" aria-label="Mudar idioma" class="bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm shadow-md rounded-full px-4 py-2 text-sm font-bold text-dark-700 dark:text-white hover:shadow-lg transition-all duration-300 flex items-center space-x-2 border border-gray-200 dark:border-gray-600">
+                <i class="fas fa-globe-americas text-primary-500"></i>
                 <span id="current-lang">PT</span>
             </button>
-            <div id="language-dropdown" class="absolute top-12 right-0 w-32 bg-white dark:bg-dark-700 rounded-lg shadow-lg py-1 hidden glass-effect">
-                <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="pt">
-                    <span class="fi fi-br mr-2"></span>
-                    Português
+            <div id="language-dropdown" class="absolute top-12 right-0 w-40 bg-white dark:bg-dark-700 rounded-xl shadow-xl py-2 hidden glass-effect overflow-hidden">
+                <button class="lang-option w-full text-left px-4 py-3 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center gap-3" data-lang="pt">
+                    <span class="fi fi-br rounded-sm shadow-sm"></span> Português
                 </button>
-                <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="es">
-                    <span class="fi fi-es mr-2"></span>
-                    Español
+                <button class="lang-option w-full text-left px-4 py-3 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center gap-3" data-lang="es">
+                    <span class="fi fi-es rounded-sm shadow-sm"></span> Español
                 </button>
-                <button class="lang-option w-full text-left px-3 py-2 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center" data-lang="en">
-                    <span class="fi fi-us mr-2"></span>
-                    English
+                <button class="lang-option w-full text-left px-4 py-3 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center gap-3" data-lang="en">
+                    <span class="fi fi-us rounded-sm shadow-sm"></span> English
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Theme Toggle -->
     <div class="fixed top-6 left-6 z-40">
-        <button id="theme-toggle" class="bg-white dark:bg-dark-700 shadow-md rounded-full p-3 text-dark-700 dark:text-white hover:shadow-lg transition-all duration-300">
+        <button id="theme-toggle" aria-label="Alternar tema" class="bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm shadow-md rounded-full w-10 h-10 flex items-center justify-center text-dark-700 dark:text-yellow-300 hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-600">
             <i class="fas fa-moon" id="theme-icon"></i>
         </button>
     </div>
 
-    <div class="container mx-auto px-4 py-8 max-w-md">
-        <!-- Profile Section -->
-        <div class="text-center mb-8 animate-fade-in">
-            <div class="relative inline-block mb-4">
+    <main class="container mx-auto px-4 py-12 max-w-lg">
+        <header class="text-center mb-10 animate-fade-in">
+            <div class="relative inline-block mb-6 group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary-400 to-blue-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
                 <img 
                     src="https://picsum.photos/150?random=1" 
                     alt="Foto de perfil de Felipe Felp" 
-                    class="w-32 h-32 rounded-full border-4 border-white dark:border-dark-700 shadow-lg mx-auto"
+                    class="relative w-36 h-36 rounded-full border-4 border-white dark:border-dark-700 shadow-xl mx-auto object-cover"
                     loading="lazy"
                 />
-                <div class="absolute -bottom-2 -right-2 bg-primary-500 text-white p-2 rounded-full">
-                    <i class="fas fa-check text-xs"></i>
+                <div class="absolute bottom-1 right-1 bg-green-500 text-white p-1.5 rounded-full border-4 border-white dark:border-dark-800" title="Available for work">
+                    <i class="fas fa-check text-[10px]"></i>
                 </div>
             </div>
             
-            <h1 class="text-2xl font-bold text-dark-800 dark:text-white mb-2" id="profile-name">Felipe Felp</h1>
-            <p class="text-primary-600 dark:text-primary-400 font-medium mb-3" id="profile-title">
-                Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer
+            <h1 class="text-3xl font-bold text-dark-900 dark:text-white mb-2 tracking-tight" id="profile-name">Felipe Almeida da Silva (Felp)</h1>
+            <p class="text-primary-600 dark:text-primary-400 font-semibold mb-4 text-lg" id="profile-title">
+                Engenheiro de Software & Game Dev
             </p>
             
-            <p class="text-dark-600 dark:text-dark-300 text-sm mb-6 max-w-sm mx-auto" id="profile-description">
+            <p class="text-dark-600 dark:text-dark-300 leading-relaxed max-w-sm mx-auto" id="profile-description">
                 Criando soluções inovadoras através de código, design e tecnologia. 
                 Especializado em desenvolvimento web, aplicações móveis e criação de jogos.
             </p>
-        </div>
+        </header>
 
-        <!-- Links Section -->
-        <div class="space-y-4 mb-8 animate-slide-up">
-            <!-- GitHub -->
-            <a href="https://github.com/felipe-felpipi" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+        <nav class="space-y-4 mb-10 animate-slide-up">
+            <a href="https://github.com/felipe-felpipi" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
-                        <i class="fab fa-github text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900/50 transition-colors text-2xl">
+                        <i class="fab fa-github text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-github">GitHub</h3>
-                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-github-desc">Projetos e código fonte</p>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-github">GitHub</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-github-desc">Projetos e código fonte</p>
                     </div>
-                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
                 </div>
             </a>
 
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/felipe-almeida-b1134b1b0/" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <a href="https://www.linkedin.com/in/felipe-almeida-b1134b1b0/" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
-                        <i class="fab fa-linkedin text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors text-2xl">
+                        <i class="fab fa-linkedin text-blue-700 dark:text-blue-400"></i>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-linkedin">LinkedIn</h3>
-                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-linkedin-desc">Conecte-se profissionalmente</p>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-linkedin">LinkedIn</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-linkedin-desc">Conecte-se profissionalmente</p>
                     </div>
-                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
                 </div>
             </a>
 
-            <!-- Portfolio -->
-            <a href="https://matchmaking.games/p/felipefelp" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <a href="https://matchmaking.games/p/felipefelp" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
-                        <i class="fas fa-briefcase text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 transition-colors text-2xl">
+                        <i class="fas fa-laptop-code text-purple-600 dark:text-purple-400"></i>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-portfolio">Portfólio</h3>
-                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-portfolio-desc">Meus projetos e trabalhos</p>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-portfolio">Portfólio</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-portfolio-desc">Meus projetos e trabalhos</p>
                     </div>
-                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
                 </div>
             </a>
 
-            <!-- Email -->
-            <a href="mailto:felipealmeidajob@gmail.com" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <a href="mailto:felipealmeidajob@gmail.com" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
-                        <i class="fas fa-envelope text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors text-2xl">
+                        <i class="fas fa-envelope text-red-600 dark:text-red-400"></i>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-email">E-mail</h3>
-                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-email-desc">Entre em contato</p>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-email">E-mail</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-email-desc">Entre em contato</p>
                     </div>
-                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
                 </div>
             </a>
 
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/@FelipeAlmeidaCoder" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <a href="https://www.youtube.com/@FelipeAlmeidaCoder" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-dark-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900 transition-colors">
-                        <i class="fab fa-youtube text-xl text-dark-700 dark:text-dark-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors text-2xl">
+                        <i class="fab fa-youtube text-red-600"></i>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-dark-800 dark:text-white" id="link-youtube">YouTube</h3>
-                        <p class="text-sm text-dark-500 dark:text-dark-400" id="link-youtube-desc">Tutoriais e conteúdo</p>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-youtube">YouTube</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-youtube-desc">Tutoriais e conteúdo</p>
                     </div>
-                    <i class="fas fa-chevron-right text-dark-400 dark:text-dark-500 group-hover:text-primary-500 transition-colors"></i>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
                 </div>
             </a>
-        </div>
+        </nav>
 
-        <!-- Skills Section -->
-        <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-sm mb-8 animate-slide-up">
-            <h2 class="text-lg font-semibold text-dark-800 dark:text-white mb-4" id="skills-title">Habilidades & Tecnologias</h2>
+        <section class="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-sm mb-10 animate-slide-up border border-gray-100 dark:border-dark-700">
+            <h2 class="text-lg font-bold text-dark-800 dark:text-white mb-4 flex items-center gap-2" id="skills-title">
+                <i class="fas fa-code text-primary-500"></i> Habilidades & Tecnologias
+            </h2>
             <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">JavaScript</span>
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">TypeScript</span>
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">React</span>
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Node.js</span>
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Python</span>
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Unity</span>
-                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">Game Design</span>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 rounded-full text-sm font-medium">JavaScript</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">TypeScript</span>
+                <span class="px-3 py-1 bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300 rounded-full text-sm font-medium">React</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded-full text-sm font-medium">Node.js</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-full text-sm font-medium">Unity</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium">Game Design</span>
             </div>
-        </div>
+        </section>
 
-        <!-- Footer -->
-        <div class="text-center text-dark-500 dark:text-dark-400 text-sm">
-            <p id="footer-text">© 2025 Felipe Felp. Todos os direitos reservados.</p>
-        </div>
-    </div>
+        <footer class="text-center text-dark-500 dark:text-dark-400 text-sm py-4">
+            <p id="footer-text">© 2026 Felipe Felp. Todos os direitos reservados.</p>
+        </footer>
+    </main>
 
-    <script>
+    <script defer>
         // Language data
         const translations = {
             "pt": {
-                "profileName": "Felipe Felp",
+                "profileName": "Felipe Almeida da Silva (Felp)",
                 "profileTitle": "Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer",
                 "profileDescription": "Criando soluções inovadoras através de código, design e tecnologia. Especializado em desenvolvimento web, aplicações móveis e criação de jogos.",
                 "linkGitHub": "GitHub",
@@ -319,9 +369,9 @@
                 "linkEmail": "E-mail",
                 "linkEmailDesc": "Entre em contato",
                 "linkYouTube": "YouTube",
-                "linkYouTubeDesc": "Tutorials e conteúdo",
+                "linkYouTubeDesc": "Tutoriais e conteúdo",
                 "skillsTitle": "Habilidades & Tecnologias",
-                "footerText": "© 2025 Felipe Felp. Todos os direitos reservados.",
+                "footerText": "© 2026 Felipe Felp. Todos os direitos reservados.",
                 "accessibilityTitle": "Acessibilidade",
                 "increaseText": "Aumentar Texto",
                 "decreaseText": "Diminuir Texto",
@@ -329,7 +379,7 @@
                 "readPage": "Ler Página"
             },
             "es": {
-                "profileName": "Felipe Felp",
+                "profileName": "Felipe Almeida da Silva (Felp)",
                 "profileTitle": "Ingeniero de Software, Desarrollador Fullstack, Diseñador de Juegos y Desarrollador",
                 "profileDescription": "Creando soluciones innovadoras a través de código, diseño y tecnología. Especializado en desarrollo web, aplicaciones móviles y creación de juegos.",
                 "linkGitHub": "GitHub",
@@ -343,7 +393,7 @@
                 "linkYouTube": "YouTube",
                 "linkYouTubeDesc": "Tutoriales y contenido",
                 "skillsTitle": "Habilidades & Tecnologías",
-                "footerText": "© 2025 Felipe Felp. Todos los derechos reservados.",
+                "footerText": "© 2026 Felipe Felp. Todos los derechos reservados.",
                 "accessibilityTitle": "Accesibilidad",
                 "increaseText": "Aumentar Texto",
                 "decreaseText": "Disminuir Texto",
@@ -351,7 +401,7 @@
                 "readPage": "Leer Página"
             },
             "en": {
-                "profileName": "Felipe Felp",
+                "profileName": "Felipe Almeida da Silva (Felp)",
                 "profileTitle": "Software Engineer, Fullstack Developer, Game Designer and Developer",
                 "profileDescription": "Creating innovative solutions through code, design and technology. Specialized in web development, mobile applications and game creation.",
                 "linkGitHub": "GitHub",
@@ -365,7 +415,7 @@
                 "linkYouTube": "YouTube",
                 "linkYouTubeDesc": "Tutorials and content",
                 "skillsTitle": "Skills & Technologies",
-                "footerText": "© 2025 Felipe Felp. All rights reserved.",
+                "footerText": "© 2026 Felipe Felp. All rights reserved.",
                 "accessibilityTitle": "Accessibility",
                 "increaseText": "Increase Text",
                 "decreaseText": "Decrease Text",
@@ -374,213 +424,175 @@
             }
         };
 
-        // Current state
-        let currentLanguage = "pt";
-        let currentTheme = "light";
-        let textSize = 1; // Base size multiplier
-        let highContrast = false;
+        // State Management
+        let currentLanguage = localStorage.getItem("preferredLanguage") || "pt";
+        let textSize = parseFloat(localStorage.getItem("textSize")) || 1;
+        let highContrast = localStorage.getItem("highContrast") === "true";
 
         // DOM Elements
-        const themeToggle = document.getElementById("theme-toggle");
-        const themeIcon = document.getElementById("theme-icon");
-        const languageToggle = document.getElementById("language-toggle");
-        const currentLang = document.getElementById("current-lang");
-        const languageDropdown = document.getElementById("language-dropdown");
-        const accessibilityToggle = document.getElementById("accessibility-toggle");
-        const accessibilityPanel = document.getElementById("accessibility-panel");
+        const elements = {
+            themeToggle: document.getElementById("theme-toggle"),
+            themeIcon: document.getElementById("theme-icon"),
+            languageToggle: document.getElementById("language-toggle"),
+            currentLang: document.getElementById("current-lang"),
+            languageDropdown: document.getElementById("language-dropdown"),
+            accessibilityToggle: document.getElementById("accessibility-toggle"),
+            accessibilityPanel: document.getElementById("accessibility-panel"),
+            body: document.body,
+            root: document.documentElement
+        };
 
-        // Initialize page
+        // Initialize
         function init() {
-            loadPreferences();
+            // Apply initial states
+            changeLanguage(currentLanguage);
+            applyTextSize();
+            if (highContrast) elements.body.classList.add("high-contrast");
+            updateThemeIcon();
+
             setupEventListeners();
-            updateContent();
         }
 
-        // Load user preferences from localStorage
-        function loadPreferences() {
-            const savedLanguage = localStorage.getItem("preferredLanguage");
-            const savedTheme = localStorage.getItem("preferredTheme");
-            const savedTextSize = localStorage.getItem("textSize");
-            const savedHighContrast = localStorage.getItem("highContrast");
-
-            if (savedLanguage) {
-                currentLanguage = savedLanguage;
-            }
-
-            if (savedTheme) {
-                currentTheme = savedTheme;
-                document.documentElement.classList.toggle("dark", savedTheme === "dark");
-                updateThemeIcon();
-            }
-
-            if (savedTextSize) {
-                textSize = parseFloat(savedTextSize);
-                applyTextSize();
-            }
-
-            if (savedHighContrast === "true") {
-                highContrast = true;
-                document.body.classList.add("high-contrast");
-            }
-        }
-
-        // Setup event listeners
         function setupEventListeners() {
-            // Theme toggle
-            themeToggle.addEventListener("click", toggleTheme);
+            // Theme
+            elements.themeToggle.addEventListener("click", toggleTheme);
 
-            // Language toggle
-            languageToggle.addEventListener("click", toggleLanguageDropdown);
-            
-            // Language selection
-            document.querySelectorAll(".lang-option").forEach(option => {
-                option.addEventListener("click", (e) => {
-                    const lang = e.currentTarget.getAttribute("data-lang");
-                    changeLanguage(lang);
-                    languageDropdown.classList.add("hidden");
+            // Language
+            elements.languageToggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                elements.languageDropdown.classList.toggle("hidden");
+                elements.accessibilityPanel.classList.add("hidden");
+            });
+
+            document.querySelectorAll(".lang-option").forEach(opt => {
+                opt.addEventListener("click", () => {
+                    changeLanguage(opt.getAttribute("data-lang"));
+                    elements.languageDropdown.classList.add("hidden");
                 });
             });
 
-            // Accessibility toggle
-            accessibilityToggle.addEventListener("click", toggleAccessibilityPanel);
-            
-            // Accessibility features
+            // Accessibility
+            elements.accessibilityToggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                elements.accessibilityPanel.classList.toggle("hidden");
+                elements.languageDropdown.classList.add("hidden");
+            });
+
             document.querySelectorAll(".accessibility-btn").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    const action = e.currentTarget.getAttribute("data-action");
-                    handleAccessibilityAction(action);
-                });
+                btn.addEventListener("click", (e) => handleAccessibility(e.currentTarget.getAttribute("data-action")));
             });
 
-            // Close dropdowns when clicking outside
-            document.addEventListener("click", (e) => {
-                if (!languageToggle.contains(e.target) && !languageDropdown.contains(e.target)) {
-                    languageDropdown.classList.add("hidden");
-                }
-                
-                if (!accessibilityToggle.contains(e.target) && !accessibilityPanel.contains(e.target)) {
-                    accessibilityPanel.classList.add("hidden");
-                }
+            // Close on click outside
+            document.addEventListener("click", () => {
+                elements.languageDropdown.classList.add("hidden");
+                elements.accessibilityPanel.classList.add("hidden");
             });
         }
 
-        // Theme functionality
+        // Logic Functions
         function toggleTheme() {
-            currentTheme = currentTheme === "light" ? "dark" : "light";
-            document.documentElement.classList.toggle("dark", currentTheme === "dark");
-            localStorage.setItem("preferredTheme", currentTheme);
+            const isDark = elements.root.classList.contains("dark");
+            if (isDark) {
+                elements.root.classList.remove("dark");
+                localStorage.setItem("preferredTheme", "light");
+            } else {
+                elements.root.classList.add("dark");
+                localStorage.setItem("preferredTheme", "dark");
+            }
             updateThemeIcon();
         }
 
         function updateThemeIcon() {
-            if (currentTheme === "dark") {
-                themeIcon.classList.remove("fa-moon");
-                themeIcon.classList.add("fa-sun");
-            } else {
-                themeIcon.classList.remove("fa-sun");
-                themeIcon.classList.add("fa-moon");
-            }
-        }
-
-        // Language functionality
-        function toggleLanguageDropdown() {
-            languageDropdown.classList.toggle("hidden");
+            const isDark = elements.root.classList.contains("dark");
+            elements.themeIcon.className = isDark ? "fas fa-sun" : "fas fa-moon";
         }
 
         function changeLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem("preferredLanguage", lang);
-            currentLang.textContent = lang.toUpperCase();
-            updateContent();
-        }
+    currentLanguage = lang;
+    localStorage.setItem("preferredLanguage", lang);
+    elements.currentLang.textContent = lang.toUpperCase();
+    
+    const t = translations[lang];
+    if (!t) return;
 
-        // Accessibility functionality
-        function toggleAccessibilityPanel() {
-            accessibilityPanel.classList.toggle("hidden");
-        }
+    // Mapeamento direto de IDs para chaves do objeto translations
+    const idMap = {
+        // IDs existentes no HTML
+        'profile-name': 'profileName',
+        'profile-title': 'profileTitle',
+        'profile-description': 'profileDescription',
+        'link-github': 'linkGitHub',
+        'link-github-desc': 'linkGitHubDesc',
+        'link-linkedin': 'linkLinkedIn',
+        'link-linkedin-desc': 'linkLinkedInDesc',
+        'link-portfolio': 'linkPortfolio',
+        'link-portfolio-desc': 'linkPortfolioDesc',
+        'link-email': 'linkEmail',
+        'link-email-desc': 'linkEmailDesc',
+        'link-youtube': 'linkYouTube',
+        'link-youtube-desc': 'linkYouTubeDesc',
+        'skills-title': 'skillsTitle',
+        'footer-text': 'footerText',
+        'accessibility-title': 'accessibilityTitle',
+        'increase-text-label': 'increaseText',
+        'decrease-text-label': 'decreaseText',
+        'high-contrast-label': 'highContrast',
+        'read-page-label': 'readPage'
+    };
 
-        function handleAccessibilityAction(action) {
-            switch (action) {
+    // Atualiza todos os elementos baseado no mapeamento
+    Object.keys(idMap).forEach(id => {
+        const el = document.getElementById(id);
+        const key = idMap[id];
+        if (el && t[key]) {
+            el.textContent = t[key];
+        }
+    });
+}
+
+        function handleAccessibility(action) {
+            switch(action) {
                 case "increase-text":
                     textSize = Math.min(textSize + 0.1, 1.5);
-                    applyTextSize();
                     break;
                 case "decrease-text":
-                    textSize = Math.max(textSize - 0.1, 0.8);
-                    applyTextSize();
+                    textSize = Math.max(textSize - 0.1, 0.9);
                     break;
                 case "high-contrast":
-                    toggleHighContrast();
-                    break;
+                    highContrast = !highContrast;
+                    elements.body.classList.toggle("high-contrast", highContrast);
+                    localStorage.setItem("highContrast", highContrast);
+                    return; // No need to apply text size
                 case "read-page":
-                    readPageContent();
-                    break;
+                    readPage();
+                    return;
             }
+            localStorage.setItem("textSize", textSize);
+            applyTextSize();
         }
 
         function applyTextSize() {
-            document.documentElement.style.fontSize = `${textSize * 100}%`;
-            localStorage.setItem("textSize", textSize);
+            elements.root.style.fontSize = `${textSize * 16}px`; // Base 16px
         }
 
-        function toggleHighContrast() {
-            highContrast = !highContrast;
-            document.body.classList.toggle("high-contrast", highContrast);
-            localStorage.setItem("highContrast", highContrast);
+        function readPage() {
+            if (!window.speechSynthesis) return alert("Seu navegador não suporta leitura.");
+            
+            window.speechSynthesis.cancel();
+            
+            // Construct text to read based on main content
+            const content = document.querySelector("main").innerText;
+            const utterance = new SpeechSynthesisUtterance(content);
+            
+            utterance.lang = currentLanguage === 'pt' ? 'pt-BR' : currentLanguage === 'es' ? 'es-ES' : 'en-US';
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            
+            window.speechSynthesis.speak(utterance);
         }
 
-        function readPageContent() {
-            const content = document.querySelector(".container").innerText;
-            if ("speechSynthesis" in window) {
-                // Cancel any ongoing speech
-                speechSynthesis.cancel();
-                
-                const utterance = new SpeechSynthesisUtterance(content);
-                utterance.lang = currentLanguage === "pt" ? "pt-BR" : currentLanguage === "es" ? "es-ES" : "en-US";
-                utterance.rate = 0.8;
-                speechSynthesis.speak(utterance);
-            } else {
-                alert("Seu navegador não suporta leitura de texto.");
-            }
-        }
-
-        // Update all content based on current language
-        function updateContent() {
-            const t = translations[currentLanguage];
-            
-            if (!t) return;
-            
-            // Update profile section
-            document.getElementById("profile-name").textContent = t.profileName;
-            document.getElementById("profile-title").textContent = t.profileTitle;
-            document.getElementById("profile-description").textContent = t.profileDescription;
-            
-            // Update links
-            document.getElementById("link-github").textContent = t.linkGitHub;
-            document.getElementById("link-github-desc").textContent = t.linkGitHubDesc;
-            document.getElementById("link-linkedin").textContent = t.linkLinkedIn;
-            document.getElementById("link-linkedin-desc").textContent = t.linkLinkedInDesc;
-            document.getElementById("link-portfolio").textContent = t.linkPortfolio;
-            document.getElementById("link-portfolio-desc").textContent = t.linkPortfolioDesc;
-            document.getElementById("link-email").textContent = t.linkEmail;
-            document.getElementById("link-email-desc").textContent = t.linkEmailDesc;
-            document.getElementById("link-youtube").textContent = t.linkYouTube;
-            document.getElementById("link-youtube-desc").textContent = t.linkYouTubeDesc;
-            
-            // Update skills section
-            document.getElementById("skills-title").textContent = t.skillsTitle;
-            document.getElementById("footer-text").textContent = t.footerText;
-            
-            // Update accessibility panel
-            document.getElementById("accessibility-title").textContent = t.accessibilityTitle;
-            document.getElementById("increase-text-label").textContent = t.increaseText;
-            document.getElementById("decrease-text-label").textContent = t.decreaseText;
-            document.getElementById("high-contrast-label").textContent = t.highContrast;
-            document.getElementById("read-page-label").textContent = t.readPage;
-        }
-
-        // Initialize the application
-        document.addEventListener("DOMContentLoaded", init);
+        // Run
+        init();
     </script>
 </body>
 </html>
