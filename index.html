@@ -1,49 +1,257 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felipe Almeida | Linktree</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Felipe Almeida da Silva (Felp) - Engenheiro de Software & Desenvolvedor Fullstack</title>
+    <meta name="description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer. Conecte-se comigo através dos meus links profissionais.">
+    <meta name="keywords" content="engenheiro de software, desenvolvedor fullstack, game designer, programador, desenvolvimento web">
+    <meta name="author" content="Felipe Felp">
+    
+    <meta property="og:title" content="Felipe Almeida - Engenheiro de Software & Desenvolvedor Fullstack">
+    <meta property="og:description" content="Engenheiro de Software, Desenvolvedor Fullstack, Game Designer e Developer">
+    <meta property="og:type" content="website">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.4/css/flag-icons.min.css">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc',
+                            400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+                            800: '#075985', 900: '#0c4a6e',
+                        },
+                        dark: {
+                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1',
+                            400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155',
+                            800: '#1e293b', 900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+
+        // Anti-Flicker Script
+        try {
+            const savedTheme = localStorage.getItem("preferredTheme");
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    </script>
 </head>
-<body>
-    <!-- Partículas de fundo -->
-    <div id="particles-js"></div>
+<body class="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-dark-900 dark:to-dark-800 font-sans transition-colors duration-300 text-dark-900 dark:text-gray-100">
     
-    <!-- Container principal -->
-    <div class="container">
-        <header>
-            <h1>Felipe Almeida da Silva</h1>
-            <h2>Programador & Criador de Conteúdo</h2>
-        </header>
-        <main>
-            <p>Bem-vindo ao meu Linktree! Confira meus projetos:</p>
-            <div class="links">
-                <a href="https://www.linkedin.com/in/felipe-almeida-b1134b1b0/" target="_blank">
-                    <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
-                <a href="https://sorrizin-studio.itch.io/" target="_blank">
-                    <i class="fab fa-itch-io"></i> Itch.io Sorrizin Studio
-                </a>
-                <a href="https://felipe-almeida-da-silva.itch.io/" target="_blank">
-                    <i class="fab fa-itch-io"></i> Itch.io Felipe Almeida
-                </a>
-                <a href="https://github.com/Felipe-Felpipi" target="_blank">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
+    <!-- Accessibility Widget -->
+    <div id="accessibility-widget" class="fixed bottom-6 right-6 z-50">
+        <button id="accessibility-toggle" aria-label="Opções de Acessibilidade" class="bg-primary-600 hover:bg-primary-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-primary-300">
+            <i class="fas fa-universal-access text-xl"></i>
+        </button>
+        <div id="accessibility-panel" class="absolute bottom-20 right-0 w-72 bg-white dark:bg-dark-800 rounded-xl shadow-2xl p-4 hidden glass-effect border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-dark-800 dark:text-white mb-3 flex items-center gap-2" id="accessibility-title">
+                <i class="fas fa-universal-access"></i> Acessibilidade
+            </h3>
+            <div class="space-y-2">
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="increase-text">
+                    <i class="fas fa-plus-circle text-primary-500"></i>
+                    <span id="increase-text-label">Aumentar Texto</span>
+                </button>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="decrease-text">
+                    <i class="fas fa-minus-circle text-primary-500"></i>
+                    <span id="decrease-text-label">Diminuir Texto</span>
+                </button>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="high-contrast">
+                    <i class="fas fa-adjust text-primary-500"></i>
+                    <span id="high-contrast-label">Alto Contraste</span>
+                </button>
+                <button class="accessibility-btn w-full text-left px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-dark-700 transition-colors flex items-center gap-3" data-action="read-page">
+                    <i class="fas fa-volume-up text-primary-500"></i>
+                    <span id="read-page-label">Ler Página</span>
+                </button>
             </div>
-        </main>
-        <footer>
-            <p>&copy; 2025 Felipe Almeida. Todos os direitos reservados.</p>
-        </footer>
+        </div>
     </div>
-    
-    <!-- Áudios: Hover e Click -->
-    <audio id="hoverSound" src="https://cdn.freesound.org/previews/448/448081_9159316-lq.mp3"></audio>
-    <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
-    
-    <script src="script.js"></script>
+
+    <!-- Language Selector -->
+    <div class="fixed top-6 right-6 z-40">
+        <div class="relative">
+            <button id="language-toggle" aria-label="Mudar idioma" class="bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm shadow-md rounded-full px-4 py-2 text-sm font-bold text-dark-700 dark:text-white hover:shadow-lg transition-all duration-300 flex items-center space-x-2 border border-gray-200 dark:border-gray-600">
+                <i class="fas fa-globe-americas text-primary-500"></i>
+                <span id="current-lang">PT</span>
+            </button>
+            <div id="language-dropdown" class="absolute top-12 right-0 w-40 bg-white dark:bg-dark-700 rounded-xl shadow-xl py-2 hidden glass-effect overflow-hidden">
+                <button class="lang-option w-full text-left px-4 py-3 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center gap-3" data-lang="pt">
+                    <span class="fi fi-br rounded-sm shadow-sm"></span> Português
+                </button>
+                <button class="lang-option w-full text-left px-4 py-3 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center gap-3" data-lang="es">
+                    <span class="fi fi-es rounded-sm shadow-sm"></span> Español
+                </button>
+                <button class="lang-option w-full text-left px-4 py-3 hover:bg-primary-50 dark:hover:bg-dark-600 transition-colors flex items-center gap-3" data-lang="en">
+                    <span class="fi fi-us rounded-sm shadow-sm"></span> English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="fixed top-6 left-6 z-40">
+        <button id="theme-toggle" aria-label="Alternar tema" class="bg-white/80 dark:bg-dark-700/80 backdrop-blur-sm shadow-md rounded-full w-10 h-10 flex items-center justify-center text-dark-700 dark:text-yellow-300 hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-600">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 max-w-lg">
+        <header class="text-center mb-10 animate-fade-in">
+            <div class="relative inline-block mb-6 group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary-400 to-blue-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <img 
+                    src="https://picsum.photos/150?random=1" 
+                    alt="Foto de perfil de Felipe Felp" 
+                    class="relative w-36 h-36 rounded-full border-4 border-white dark:border-dark-700 shadow-xl mx-auto object-cover"
+                    loading="lazy"
+                />
+                <div class="absolute bottom-1 right-1 bg-green-500 text-white p-1.5 rounded-full border-4 border-white dark:border-dark-800" title="Available for work">
+                    <i class="fas fa-check text-[10px]"></i>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl font-bold text-dark-900 dark:text-white mb-2 tracking-tight" id="profile-name">Felipe Almeida da Silva (Felp)</h1>
+            <p class="text-primary-600 dark:text-primary-400 font-semibold mb-4 text-lg" id="profile-title">
+                Engenheiro de Software & Game Dev
+            </p>
+            
+            <p class="text-dark-600 dark:text-dark-300 leading-relaxed max-w-sm mx-auto" id="profile-description">
+                Criando soluções inovadoras através de código, design e tecnologia. 
+                Especializado em desenvolvimento web, aplicações móveis e criação de jogos.
+            </p>
+        </header>
+
+        <nav class="space-y-4 mb-10 animate-slide-up">
+            <a href="https://github.com/felipe-felpipi" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-primary-100 dark:group-hover:bg-primary-900/50 transition-colors text-2xl">
+                        <i class="fab fa-github text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-github">GitHub</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-github-desc">Projetos e código fonte</p>
+                    </div>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/felipe-almeida-b1134b1b0/" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors text-2xl">
+                        <i class="fab fa-linkedin text-blue-700 dark:text-blue-400"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-linkedin">LinkedIn</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-linkedin-desc">Conecte-se profissionalmente</p>
+                    </div>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
+                </div>
+            </a>
+
+            <a href="https://matchmaking.games/p/felipefelp" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 transition-colors text-2xl">
+                        <i class="fas fa-laptop-code text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-portfolio">Portfólio</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-portfolio-desc">Meus projetos e trabalhos</p>
+                    </div>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
+                </div>
+            </a>
+
+            <a href="mailto:felipealmeidajob@gmail.com" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors text-2xl">
+                        <i class="fas fa-envelope text-red-600 dark:text-red-400"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-email">E-mail</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-email-desc">Entre em contato</p>
+                    </div>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/@FelipeAlmeidaCoder" target="_blank" rel="noopener noreferrer" class="link-card block bg-white dark:bg-dark-800 rounded-xl p-4 shadow-sm group">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-dark-700 rounded-lg flex items-center justify-center group-hover:bg-red-100 dark:group-hover:bg-red-900/30 transition-colors text-2xl">
+                        <i class="fab fa-youtube text-red-600"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-dark-800 dark:text-white truncate" id="link-youtube">YouTube</h3>
+                        <p class="text-sm text-dark-500 dark:text-dark-400 truncate" id="link-youtube-desc">Tutoriais e conteúdo</p>
+                    </div>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all text-primary-500"></i>
+                </div>
+            </a>
+        </nav>
+
+        <section class="bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-sm mb-10 animate-slide-up border border-gray-100 dark:border-dark-700">
+            <h2 class="text-lg font-bold text-dark-800 dark:text-white mb-4 flex items-center gap-2" id="skills-title">
+                <i class="fas fa-code text-primary-500"></i> Habilidades & Tecnologias
+            </h2>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 rounded-full text-sm font-medium">JavaScript</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">TypeScript</span>
+                <span class="px-3 py-1 bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300 rounded-full text-sm font-medium">React</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded-full text-sm font-medium">Node.js</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium">Python</span>
+                <span class="px-3 py-1 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-full text-sm font-medium">Unity</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium">Game Design</span>
+            </div>
+        </section>
+
+        <footer class="text-center text-dark-500 dark:text-dark-400 text-sm py-4">
+            <p id="footer-text">© 2025 Felipe Felp. Todos os direitos reservados.</p>
+        </footer>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
 </body>
 </html>
