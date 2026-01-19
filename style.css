@@ -1,133 +1,104 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+/* Estilos Base (Normal) */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #121212, #1e1e1e);
-    color: white;
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
-    overflow: hidden;
+.dark .glass-effect {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.link-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e2e8f0;
 }
 
-/* Partículas de fundo */
-#particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+.link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15); 
+    border-color: #38bdf8;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-    z-index: 3; /* Acima das partículas */
+.dark .link-card {
+    border: 1px solid #334155;
 }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #0073b1;
+.dark .link-card:hover {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    border-color: #38bdf8;
 }
 
-h2 {
-    font-size: 18px;
-    font-weight: 300;
-    margin-bottom: 20px;
-    opacity: 0.8;
+/* --- CORREÇÃO DO ALTO CONTRASTE (Padrão Acessibilidade Real) --- */
+
+/* Quando a classe .high-contrast estiver ativa no body */
+body.high-contrast {
+    background-image: none !important;
+    background-color: #000000 !important; /* Fundo Preto Puro */
+    color: #FFFF00 !important; /* Texto Amarelo Padrão */
 }
 
-.links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: white;
-    background: #333;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    z-index: 3;
+/* Removemos sombras, efeitos de vidro e gradientes */
+body.high-contrast * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    background-image: none !important;
+    transition: none !important; /* Remove animações para reduzir tontura */
 }
 
-.links a:hover {
-    background: #0073b1;
-    transform: scale(1.1);
-    box-shadow: 0 0 10px #0073b1, 0 0 20px #0073b1, 0 0 30px #0073b1;
+/* Força fundos pretos e bordas brancas nos cartões */
+body.high-contrast .glass-effect,
+body.high-contrast .link-card,
+body.high-contrast .bg-white,
+body.high-contrast nav a,
+body.high-contrast section,
+body.high-contrast #language-dropdown,
+body.high-contrast #accessibility-panel {
+    background-color: #000000 !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFF00 !important;
 }
 
-.links a i {
-    margin-right: 10px;
-    font-size: 18px;
+/* Títulos em Branco para hierarquia */
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast strong,
+body.high-contrast .font-bold {
+    color: #FFFFFF !important;
 }
 
-footer {
-    margin-top: 20px;
-    font-size: 12px;
-    opacity: 0.6;
+/* Links e Ícones em Ciano ou Amarelo */
+body.high-contrast i,
+body.high-contrast span {
+    color: #FFFF00 !important;
 }
 
-@media (max-width: 600px) {
-    .container {
-        padding: 15px;
-    }
-    h1 {
-        font-size: 22px;
-    }
-    h2 {
-        font-size: 16px;
-    }
-    .links a {
-        font-size: 14px;
-        padding: 10px;
-    }
+body.high-contrast a:hover {
+    text-decoration: underline !important;
+    background-color: #333 !important;
 }
 
-/* Emojis caindo */
-.emoji {
-    position: absolute;
-    top: -50px;
-    font-size: 24px;
-    opacity: 0.8;
-    animation: fall linear infinite;
-    z-index: 2;
+/* Ajuste específico para a foto não ficar estourada, mas ter borda */
+body.high-contrast img {
+    filter: grayscale(100%) contrast(1.2);
+    border: 2px solid #FFFFFF !important;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
+/* Botões de ação */
+body.high-contrast button {
+    background-color: #000000 !important;
+    border: 2px solid #FFFF00 !important;
+    color: #FFFF00 !important;
 }
 
-/* Efeito de linha azul (trailing) para os emojis */
-.emoji::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -60px;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 60px;
-    background: linear-gradient(to bottom, #0073b1, transparent);
-    opacity: 0.7;
+body.high-contrast button:hover {
+    background-color: #FFFF00 !important;
+    color: #000000 !important;
 }
+
+/* Utilitários */
+.hidden { display: none !important; }
